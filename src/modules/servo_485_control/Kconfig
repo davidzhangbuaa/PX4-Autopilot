@@ -1,0 +1,12 @@
+menuconfig MODULES_SERVO_485_CONTROL
+	bool "servo_485_control"
+	default n
+	---help---
+		Enable support for servo control
+
+menuconfig USER_SERVO_485_CONTROL
+	bool "servo_485_control running as userspace module"
+	default y
+	depends on BOARD_PROTECTED && MODULES_SERVO_485_CONTROL
+	---help---
+		Put servo_485_control in userspace memory
