@@ -264,7 +264,7 @@ void Servo485Control::run()
 	while (!should_exit()) {
 		perf_begin(_loop_perf);
 
-		if (hrt_elapsed_time(&servo_485_past)>20_ms)
+		if (hrt_elapsed_time(&servo_485_past)>100_ms)
 		{
 			// 正常工作模式
 			if(is_normal == true){
@@ -278,8 +278,8 @@ void Servo485Control::run()
 				{
 					_servo_angle[0] = angle_1;
 					_servo_angle[1] = angle_2;
-					_servo_angle[2] = angle_1;
-					_servo_angle[3] = angle_2;
+					_servo_angle[2] = -angle_1;
+					_servo_angle[3] = -angle_2;
 					_servo_direction_change_hysteresis.set_state_and_update(false, hrt_absolute_time());
 					// if (hrt_elapsed_time(&servo_485_past)>50_ms){
 						// PX4_INFO("TRUE");
@@ -287,8 +287,8 @@ void Servo485Control::run()
 				}else{
 					_servo_angle[0] = -angle_1;
 					_servo_angle[1] = -angle_2;
-					_servo_angle[2] = -angle_1;
-					_servo_angle[3] = -angle_2;
+					_servo_angle[2] = angle_1;
+					_servo_angle[3] = angle_2;
 					// if (hrt_elapsed_time(&servo_485_past)>50_ms){
 						// PX4_INFO("FALSE");
 					// }
